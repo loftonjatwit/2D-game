@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://q24f1tt7smpv"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_ymrrp"]
+[ext_resource type="Texture2D" uid="uid://dtta530k1jpaj" path="res://art/enemyFlyingAlt_1.png" id="2_2ail6"]
+[ext_resource type="Texture2D" uid="uid://dyt65h5qfa1aq" path="res://art/enemyFlyingAlt_2.png" id="3_ie54h"]
+[ext_resource type="Texture2D" uid="uid://dbg7o8xvsbvku" path="res://art/enemySwimming_1.png" id="4_3tuml"]
+[ext_resource type="Texture2D" uid="uid://b0w251w7edteb" path="res://art/enemySwimming_2.png" id="5_1a1eo"]
+[ext_resource type="Texture2D" uid="uid://r6cr7l6n0oig" path="res://art/enemyWalking_1.png" id="6_u2g46"]
+[ext_resource type="Texture2D" uid="uid://daftf2u37adbw" path="res://art/enemyWalking_2.png" id="7_yedbj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_upkgo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2ail6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ie54h")
+}],
+"loop": false,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3tuml")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1a1eo")
+}],
+"loop": false,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_u2g46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yedbj")
+}],
+"loop": false,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dts3o"]
+radius = 35.0
+height = 70.0
+
+[node name="Mob" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_ymrrp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_upkgo")
+animation = &"walk"
+frame = 1
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dts3o")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["mobs"]]
